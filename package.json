@@ -1,0 +1,30 @@
+{
+  "name": "fullstacktemplate",
+  "version": "1.0.0",
+  "description": "Full Stack Template for Avion School",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "express": " nodemon app.js --prefix backend/express"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hnbmunoz/FullStackTemplate.git"
+  },
+  "keywords": [
+    "Avion",
+    "Full",
+    "Stack",
+    "Template"
+  ],
+  "author": "Henri Nicholli Munoz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hnbmunoz/FullStackTemplate/issues"
+  },
+  "homepage": "https://github.com/hnbmunoz/FullStackTemplate#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}
