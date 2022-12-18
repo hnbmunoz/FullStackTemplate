@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "express": " nodemon app.js --prefix backend/express"
+    "express": " nodemon app.js --prefix backend/express",
+    "build:react": "npm run dev  --prefix frontend/react"
   },
   "repository": {
     "type": "git",
