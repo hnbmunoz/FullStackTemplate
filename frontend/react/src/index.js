@@ -6,7 +6,7 @@ import './assets/scss/_index.scss'
 
 
 test();
-testImage();
+testImage()
 testGif();
 
 const submitButton = new SubmitButton();
