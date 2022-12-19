@@ -1,0 +1,10 @@
+$font-size: 1rem;
+$background-color: red;
+$font-color: #ccc;
+
+.exit-button {
+  background-color: $background-color;
+  color: $font-color;
+  padding: 0.5rem;  
+  font-size: $font-size;
+}
