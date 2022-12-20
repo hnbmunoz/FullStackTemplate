@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "express": " nodemon app.js --prefix backend/express",
-    "build:react": "npm run dev  --prefix frontend/react"
+    "build:react": "npm run dev  --prefix frontend/react",
+    "express:react": "concurrently \"npm run express\" \"npm run build:react\""
   },
   "repository": {
     "type": "git",

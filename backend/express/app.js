@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 
 const app = express();
 
-const middlewares = [bodyParser.urlencoded({ extended: true }), bodyParser.json()];
+const middlewares = [bodyParser.urlencoded({ extended: true }), bodyParser.json(), express.static("public")];
 app.use(middlewares);
 
 app.post("/message",  async (req, res) => {
