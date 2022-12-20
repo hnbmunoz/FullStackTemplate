@@ -8,6 +8,7 @@ import './assets/scss/_index.scss'
 test();
 testImage()
 testGif();
+// testGif();
 
 const submitButton = new SubmitButton();
 submitButton.render();

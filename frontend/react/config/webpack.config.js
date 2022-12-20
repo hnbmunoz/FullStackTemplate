@@ -4,13 +4,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-
-
-
 console.log('initializing webpack ....')
 module.exports = {
   entry: {
-    bundle: path.resolve( "./src/index.js"),
+    'bundle': path.resolve( "./src/index.js"),
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -21,6 +18,32 @@ module.exports = {
       dry: true, //webpack will inform which files to remove
       // keep: /\.css/ //Informs webpack what to preserve before removing other files ex. preserve all .css files
     },  // Another alternative for clean-webpack-plugin // available for webpack >= 5.20
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all', // for optamization of packaged js files only when used usually for MPA
+      minSize: 3000 // 3kb default is 30kb
+    }
+  },
+  devServer: {
+    port: 5000,
+    // proxy: {
+    //   "/": {
+    //       target: "http://localhost:3000",
+    //       secure: false,
+    //       changeOrigin: true
+    //   }
+    // },
+    static: {
+      directory: path.resolve(__dirname, '../dist'),
+    },
+    devMiddleware: {
+      index: 'index.html',
+      writeToDisk: true
+    }, 
+    open: true,
+    hot: true, // hot reloading // another option is to add --hot on package.json
+
   },
   module: {
     rules: [
@@ -80,7 +103,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       //#region generates index.html file inside folder declared earlier on output
       title: " Custom Title",
-      filename:"index.html",
+      filename:"index.html", //default is index.html use filename just incase of MPA 
+      chunks: ['bundle'],// defines which bundle to put on html generally used for MPA ref is naming in entry obj
       meta: {
         description: "Some Description",
         random1: "Another Description"
@@ -88,6 +112,8 @@ module.exports = {
       personalDescription: "My Personal Description",
       template: "template.hbs", //would still generate index.html even without template this is just for further customization
       //#endregion
+      favicon: 'src/assets/public/favicon.ico',
+      minify: true
     }),
 
   ]  
