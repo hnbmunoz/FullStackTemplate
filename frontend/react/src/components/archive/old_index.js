@@ -1,4 +1,4 @@
-import { test, testImage, testGif} from './testJS.js'
+import { test, testImage, testGif} from '../../testJS.js'
 import SubmitButton from './components/SubmitButton.js';
 import ExitButton from './components/ExitButton.js';
 import './assets/css/index.css'
