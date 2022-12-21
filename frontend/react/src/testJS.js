@@ -5,7 +5,7 @@ export  function test() {
   console.log('test')
 }
 
-
+debugger
 export  function testImage() { 
   const img = document.createElement('img')
   img.width = '300'
