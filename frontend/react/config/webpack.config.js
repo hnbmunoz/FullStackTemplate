@@ -22,7 +22,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: 'all', // for optamization of packaged js files only when used usually for MPA
-      minSize: 3000 // 3kb default is 30kb
+      minSize: 1000 // 3kb default is 30kb
     }
   },
   devServer: {

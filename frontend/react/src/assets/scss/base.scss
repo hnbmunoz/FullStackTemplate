@@ -1,0 +1,28 @@
+@forward 'global';
+@forward 'pages';
+@forward 'components';
+
+body {
+  background-color: #eee;
+  margin: 0;
+}
+
+.App {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.flex-column {
+  display:flex;
+  flex-direction: column;
+}
+
+.force-remove {
+  min-width: 0 !important;
+  font-size: 0 !important;
+  opacity: 0 !important;
+}
+
