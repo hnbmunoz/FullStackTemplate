@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 console.log('initializing webpack ....')
 module.exports = {
   entry: {
-    'bundle': path.resolve( "./src/index.js"),
+    'bundle': path.resolve( "./src/index.jsx"),
   },
   output: {
     filename: '[name].[contenthash].js',
