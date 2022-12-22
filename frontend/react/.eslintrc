@@ -10,7 +10,10 @@
     "node": true, // defines that app is in a node environment so "required" is already defined
     "browser": true  // defines that app is in a browser environment so "document" is already defined
   },
-  "ignorePatterns": ["dist/*.js", "**/vendor/*.js"], // to ignore inside dist folder
+  "ignorePatterns": [
+    "dist/*.js", 
+    "archive/*.js", 
+    "**/vendor/*.js"], // to ignore inside dist folder
   "rules": {
     "no-console": 0 // allow console.log since by default console.log is blocked
     // "no-debugger": 0
