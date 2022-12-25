@@ -4,10 +4,10 @@ import { devtools, persist } from "zustand/middleware";
 const userProfile = (set) => ({
   profile: null, 
   overwriteProfile: (newProfile) => {  
-    set((state) => ({ profile: newProfile}))     
+    set(() => ({ profile: newProfile}))     
   },
   clearProfile: () => {  
-    set((state) => ({ profile: null}))     
+    set(() => ({ profile: null}))     
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import userProfileStore from '../../store/zustandStore/useProfileStore.jsx'
 
@@ -6,11 +6,9 @@ const Login = () => {
   const [userName, setUserName] = useState('')
   const [userPassword, setUserPassword] = useState('')
 
-  const { profile, overwriteProfile, clearProfile } = userProfileStore(
-    (state) => ({
-      profile: state.profile,
-      overwriteProfile: state.overwriteProfile,
-      clearProfile: state.clearProfile,
+  const { overwriteProfile } = userProfileStore(
+    (state) => ({     
+      overwriteProfile: state.overwriteProfile,     
     })
   );
 
