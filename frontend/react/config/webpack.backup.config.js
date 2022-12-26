@@ -5,8 +5,6 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const modeConfig = env => require(`./modes/webpack.${env}.js`)(env);
 
-// const webpackMerge = require("webpack-merge");
-
 console.log('initializing webpack ....')
 // console.log(`${env}`)
 module.exports = {
@@ -29,30 +27,26 @@ module.exports = {
       minSize: 1000 // 3kb default is 30kb
     }
   },
-  // devServer: {
-  //   port: 5000,
-  //   // proxy: {
-  //   //   "/": {
-  //   //       target: "http://localhost:3000",
-  //   //       secure: false,
-  //   //       changeOrigin: true
-  //   //   }
-  //   // },
-  //   static: {
-  //     directory: path.resolve(__dirname, '../dist'),
-  //   },
-  //   devMiddleware: {
-  //     index: 'index.html',
-  //     writeToDisk: true
-  //   }, 
-  //   client: {
-  //     overlay: true
-  //   },
-  //   liveReload: false, // set to false since hot reload will be used instead  
-  //   open: true,
-  //   // hot: true, // hot reloading // another option is to add --hot on package.json
+  devServer: {
+    port: 5000,
+    // proxy: {
+    //   "/": {
+    //       target: "http://localhost:3000",
+    //       secure: false,
+    //       changeOrigin: true
+    //   }
+    // },
+    static: {
+      directory: path.resolve(__dirname, '../dist'),
+    },
+    devMiddleware: {
+      index: 'index.html',
+      writeToDisk: true
+    }, 
+    open: true,
+    hot: true, // hot reloading // another option is to add --hot on package.json
 
-  // },
+  },
   module: {
     rules: [
       {
