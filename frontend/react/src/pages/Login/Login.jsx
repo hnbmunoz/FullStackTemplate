@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import userProfileStore from '../../store/zustandStore/useProfileStore.jsx'
+import useAlertStore from '../../store/zustandStore/useAlertStore.jsx'
 
 const Login = () => {
   const [userName, setUserName] = useState('')
@@ -11,6 +12,27 @@ const Login = () => {
       overwriteProfile: state.overwriteProfile,     
     })
   );
+
+  const { displayAlert, showAlert, hideAlert } = useAlertStore(
+    (state) => ({  
+      displayAlert: state.displayAlert,   
+      showAlert: state.showAlert,  
+      hideAlert: state.hideAlert   
+    })
+  );
+
+  const notifTimeout = useRef();
+
+  useEffect(() => {
+    if (!displayAlert) return
+    notifTimeout.current = setTimeout( hideAlert,2000)  
+    return () => {
+      clearTimeout(notifTimeout.current)
+    }
+  }, [displayAlert])
+  
+
+
 
   const handleUserName = (e) => {
     setUserName(e.currentTarget.value)
@@ -30,12 +52,11 @@ const Login = () => {
         password: userPassword, // This is the body part
       }
     }).then(res => {
-      // setInputMessage("");
       overwriteProfile(res.headers)
+      showAlert()
       console.log(res)
       // console.log(res.data)
     }).catch(ex => {
-      // alert("Something went wrong. Please check the server API and try again");
       console.error(ex);
     });
   }

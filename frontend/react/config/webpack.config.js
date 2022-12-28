@@ -1,9 +1,9 @@
 const path = require('path') 
 const TerserPlugin = require('terser-webpack-plugin')  // already in webpack 5 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); 
+const CSSMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// const modeConfig = env => require(`./modes/webpack.${env}.js`)(env);
 
 // const webpackMerge = require("webpack-merge");
 
@@ -27,7 +27,21 @@ module.exports = {
     splitChunks: {
       chunks: 'all', // for optamization of packaged js files only when used usually for MPA
       minSize: 1000 // 3kb default is 30kb
-    }
+    },
+    minimize: true,
+    minimizer: [
+      '...', //tells web pack to add minimizers not overwrite 
+      new CSSMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: {removeAll: true}
+            }
+          ]
+        }
+      })
+    ]
   },
   // devServer: {
   //   port: 5000,
@@ -69,7 +83,9 @@ module.exports = {
         type: 'asset/source' 
       },
       {
-        test: /\.(css|scss)$/,
+        // test: /\.(css|scss)$/,
+        test: /\.scss$/,
+        exclude: /\.module\.css$/,
         use: [
           // 'style-loader', // creates style nodes from JS strings
           MiniCssExtractPlugin.loader,
@@ -78,6 +94,27 @@ module.exports = {
           // npm install sass in case sass-loader is making errors https://stackoverflow.com/questions/54045869/npm-run-cannot-find-module-sass-after-repeated-reinstall-attempts
         ]
       },
+      {
+        test: /\.css$/,
+        include: /\.module\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              //allows webpack to enable css modules 
+              modules: true
+              
+              // {
+              //   // localIdentName: '[hash:base64]'// makes class names in production unreadable
+              //   localIdentName: '[local]--[md:hash:7]' // makes class names readable suggested for development mode
+              // } 
+            }
+          }
+
+        ]
+      },
+
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
