@@ -17,7 +17,7 @@ module.exports = {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname,'../dist/'),
     publicPath: '', // already automamted in webpack 5
-    assetModuleFilename: 'assets/[name][ext]', // to customize output of asset/resource see link for reference https://webpack.js.org/guides/asset-modules/,
+    assetModuleFilename: 'assets/[name].[contenthash][ext]', // to customize output of asset/resource see link for reference https://webpack.js.org/guides/asset-modules/,
     clean: {
       dry: true, //webpack will inform which files to remove
       // keep: /\.css/ //Informs webpack what to preserve before removing other files ex. preserve all .css files
@@ -43,30 +43,6 @@ module.exports = {
       })
     ]
   },
-  // devServer: {
-  //   port: 5000,
-  //   // proxy: {
-  //   //   "/": {
-  //   //       target: "http://localhost:3000",
-  //   //       secure: false,
-  //   //       changeOrigin: true
-  //   //   }
-  //   // },
-  //   static: {
-  //     directory: path.resolve(__dirname, '../dist'),
-  //   },
-  //   devMiddleware: {
-  //     index: 'index.html',
-  //     writeToDisk: true
-  //   }, 
-  //   client: {
-  //     overlay: true
-  //   },
-  //   liveReload: false, // set to false since hot reload will be used instead  
-  //   open: true,
-  //   // hot: true, // hot reloading // another option is to add --hot on package.json
-
-  // },
   module: {
     rules: [
       {
@@ -76,7 +52,28 @@ module.exports = {
           dataUrlCondition: { // Set size configuration on what will webpack select either asset/resource or asset/inline
             maxSize: 10 * 1024 // 10 kilobytes if lesser inline else resource
           }
-        }
+        },
+        use: [
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                quality: 40 // refers to compression quality
+              },
+              pngquant: {
+                quality: [0.65, 0.9], // refers to min max compression quality
+                speed: 4 // default is 4 but can still be adjusted the speed of compression
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              webp: {
+                quality: 75
+              }
+            }
+          }
+        ]
+
       },
       {
         test: /\.txt/,
@@ -98,6 +95,7 @@ module.exports = {
         test: /\.css$/,
         include: /\.module\.css$/,
         use: [
+          // 'style-loader',
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',

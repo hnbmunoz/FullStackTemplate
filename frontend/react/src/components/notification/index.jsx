@@ -1,9 +1,9 @@
 import React from 'react'
-// import alert from '../../assets/css/modules/notification.css'
+import alert from '../../assets/css/modules/notification.module.css'
 
 const Notification = () => {
   return (
-    <div className='notifications'>
+    <div className={alert.notification}>
        Complete
     </div>
   )
