@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import userProfileStore from '../../store/zustandStore/useProfileStore.jsx'
 import useAlertStore from '../../store/zustandStore/useAlertStore.jsx'
+import download from '../../assets/images/download.gif'
+import avatar from '../../assets/images/Avatar.png'
 
 const Login = () => {
   const [userName, setUserName] = useState('')
@@ -29,7 +31,7 @@ const Login = () => {
     return () => {
       clearTimeout(notifTimeout.current)
     }
-  }, [displayAlert])
+  }, [displayAlert]) 
   
 
 
@@ -57,12 +59,14 @@ const Login = () => {
       console.log(res)
       // console.log(res.data)
     }).catch(ex => {
-      console.error(ex);
+      console.error(ex); 
     });
   }
 
   return (
     <div>      
+      <img src={download}></img>
+      <img src={avatar}></img>
       <input placeholder='username' value={userName} onChange={handleUserName}></input>
       <input placeholder='password' value={userPassword} onChange={handleUserPassword}></input>
       <button onClick={handleLogin}>Login</button>
