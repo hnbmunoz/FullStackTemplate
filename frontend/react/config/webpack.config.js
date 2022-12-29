@@ -11,7 +11,7 @@ console.log('initializing webpack ....')
 // console.log(`${env}`)
 module.exports = {
   entry: {
-    'bundle': path.resolve( "./src/index.jsx"),
+    'bundle': path.resolve( "./src/index.tsx"),
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -22,6 +22,9 @@ module.exports = {
       dry: true, //webpack will inform which files to remove
       // keep: /\.css/ //Informs webpack what to preserve before removing other files ex. preserve all .css files
     },  // Another alternative for clean-webpack-plugin // available for webpack >= 5.20
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.jsx', '.js'] 
   },
   optimization: {
     splitChunks: {
@@ -101,27 +104,31 @@ module.exports = {
             loader: 'css-loader',
             options: {
               //allows webpack to enable css modules 
-              modules: true
-              
-              // {
-              //   // localIdentName: '[hash:base64]'// makes class names in production unreadable
-              //   localIdentName: '[local]--[md:hash:7]' // makes class names readable suggested for development mode
-              // } 
+              modules: {
+                localIdentName: '[hash:base64]'// makes class names in production unreadable
+                // localIdentName: '[local]--[md:hash:7]' // makes class names readable suggested for development mode
+              } 
             }
           }
 
         ]
       },
-
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ["@babel/preset-react"],
             plugins:[ "@babel/plugin-proposal-class-properties"]
           }
+        },
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "ts-loader",         
         },
       },
       {
