@@ -21,6 +21,9 @@
     "development": {
       "presets": [
         ["@babel/env"]
+      ],
+      "plugins": [
+        "@emotion"
       ]
     }    
   } 

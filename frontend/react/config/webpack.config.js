@@ -5,10 +5,8 @@ const CSSMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-// const webpackMerge = require("webpack-merge");
-
 console.log('initializing webpack ....')
-// console.log(`${env}`)
+
 module.exports = {
   entry: {
     'bundle': path.resolve( "./src/index.tsx"),
@@ -23,10 +21,12 @@ module.exports = {
       // keep: /\.css/ //Informs webpack what to preserve before removing other files ex. preserve all .css files
     },  // Another alternative for clean-webpack-plugin // available for webpack >= 5.20
   },
+  devtool: 'source-map',
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'] 
   },
   optimization: {
+    usedExports: true,
     splitChunks: {
       chunks: 'all', // for optamization of packaged js files only when used usually for MPA
       minSize: 1000 // 3kb default is 30kb
@@ -152,7 +152,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       //#region generates index.html file inside folder declared earlier on output
-      title: " Custom Title",
+      title: "Custom Title",
       filename:"index.html", //default is index.html use filename just incase of MPA 
       chunks: ['bundle'],// defines which bundle to put on html generally used for MPA ref is naming in entry obj
       meta: {
