@@ -5,7 +5,7 @@ import useAlertStore from './store/zustandStore/useAlertStore.jsx'
 import { trimText  } from './utilities/helpers'
 import SelfReplicateComponent from './components/replicate/index'
 import $ from 'jquery'
-// import { Modal } from 'bootstrap'
+import { Modal } from 'bootstrap'
 
 import './assets/scss/base.scss'
 

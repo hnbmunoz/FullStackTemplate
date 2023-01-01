@@ -27,9 +27,49 @@ module.exports = {
   },
   optimization: {
     usedExports: true,
+    runtimeChunk: 'single',
     splitChunks: {
-      chunks: 'all', // for optamization of packaged js files only when used usually for MPA
-      minSize: 1000 // 3kb default is 30kb
+      chunks: 'all', // 
+      minSize: 0, // 3kb default is 30kb,
+      maxSize: Infinity,
+      //////////////Make Chunk Bundles Have Readable  Names/////////////////////
+      // name(module, chunks, cacheGroupKey) {
+      //   const filePathAsArray = module
+      //     .identifier()
+      //   return filePathAsArray[filePathAsArray.length - 1 ]
+      // },
+      //////////////Make Chunk Bundles Have Readable  Names/////////////////////
+
+      ///////////////Customizing CHunk Bundles///////////////////////////////////////////////////
+      cacheGroups:{
+        jquery: {
+          test: /[\\/]node_modules[\\/]jquery[\\/]/,
+          name: 'jquery',
+          priority: 2
+        },
+        bootstrap: {
+          test: /[\\/]node_modules[\\/]bootstrap[\\/]/,
+          name: 'bootstrap',
+          priority: 2
+        },
+        lodash: {
+          test: /[\\/]node_modules[\\/]lodash-es[\\/]/,
+          name: 'lodash-es',
+          priority: 2
+        },
+        node_modules: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+              return packageName;
+          },
+        },        
+        async: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'async',
+        }
+      }
+      ///////////////Customizing CHunk Bundles///////////////////////////////////////////////////
     },
     minimize: true,
     minimizer: [
