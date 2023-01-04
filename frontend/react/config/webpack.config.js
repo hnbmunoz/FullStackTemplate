@@ -96,6 +96,8 @@ module.exports = {
             maxSize: 10 * 1024 // 10 kilobytes if lesser inline else resource
           }
         },
+
+        ////////////// Not Working when using Ubuntu Terminal
         use: [
           {
             loader: 'image-webpack-loader',
@@ -116,6 +118,8 @@ module.exports = {
             }
           }
         ]
+        ////////////// Not Working when using Ubuntu Terminal
+
 
       },
       {
