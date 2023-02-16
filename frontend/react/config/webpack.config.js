@@ -90,35 +90,39 @@ module.exports = {
           implementation: ImageMinimizerPlugin.imageMinify,
           options: {
             plugins: [
-              ['imagemin-mozjpeg', { quality: 40 }],
-              ['imagemin-pngquant', { 
-                quality: [0.65, 0.90],
-                speed: 4
-              }],
-              ['imagemin-gifsicle', { interlaced: true }], 
-              ['imagemin-svgo', {
-                plugins: [
-                  {
-                    name: 'preset-default', 
-                    params: {
-                      overrides: {
-                        removeViewBox: false, //removes redundant viewbox attribute if w & h are specified
-                        addAttributetoSVGElement: {
-                          params: {
-                            attribute: [
-                              {xmlns: 'http://www.w3.org/svg'}
-                            ]
-                          }
-                        }
+              ["imagemin-mozjpeg", { quality: 40 }],
+              [
+                "imagemin-pngquant",
+                {
+                  quality: [0.65, 0.9],
+                  speed: 4,
+                },
+              ],
+              ["imagemin-gifsicle", { interlaced: true }],
+              [
+                "imagemin-svgo",
+                {
+                  plugins: [
+                    {
+                      name: "preset-default",
+                      params: {
+                        overrides: {
+                          removeViewBox: false, //removes redundant viewbox attribute if w & h are specified
+                          addAttributetoSVGElement: {
+                            params: {
+                              attribute: [{ xmlns: "http://www.w3.org/svg" }],
+                            },
+                          },
+                        },
                       },
-                    }
-                  }
-                ]
-              }]
-            ]
-          }
-        }
-      })
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+      }),
     ]
   },
   module: {
