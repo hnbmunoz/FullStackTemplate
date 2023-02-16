@@ -87,8 +87,8 @@ module.exports = {
       }),
       new ImageMinimizerPlugin({
         minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
-          options: {          
+          implementation: ImageMinimizerPlugin.imageminMinify, // imageminMinify
+          options: {
             plugins: [
               ["imagemin-mozjpeg", { quality: 40 }],
               [
@@ -107,12 +107,10 @@ module.exports = {
                       name: "preset-default",
                       params: {
                         overrides: {
-                          removeViewBox: false,
-                          addAttributesToSVGElement: {
+                          removeViewBox: false, //removes redundant viewbox attribute if w & h are specified
+                          addAttributetoSVGElement: {
                             params: {
-                              attributes: [
-                                { xmlns: "http://www.w3.org/2000/svg" },
-                              ],
+                              attribute: [{ xmlns: "http://www.w3.org/svg" }],
                             },
                           },
                         },
@@ -124,7 +122,7 @@ module.exports = {
             ],
           },
         },
-      }) 
+      })
     ]
   },
   module: {
