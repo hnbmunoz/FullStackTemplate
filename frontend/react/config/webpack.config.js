@@ -43,21 +43,21 @@ module.exports = {
 
       ///////////////Customizing CHunk Bundles///////////////////////////////////////////////////
       cacheGroups:{
-        jquery: {
-          test: /[\\/]node_modules[\\/]jquery[\\/]/,
-          name: 'jquery',
-          priority: 2
-        },
-        bootstrap: {
-          test: /[\\/]node_modules[\\/]bootstrap[\\/]/,
-          name: 'bootstrap',
-          priority: 2
-        },
-        lodash: {
-          test: /[\\/]node_modules[\\/]lodash-es[\\/]/,
-          name: 'lodash-es',
-          priority: 2
-        },
+        // jquery: {
+        //   test: /[\\/]node_modules[\\/]jquery[\\/]/,
+        //   name: 'jquery',
+        //   // priority: 2
+        // },
+        // bootstrap: {
+        //   test: /[\\/]node_modules[\\/]bootstrap[\\/]/,
+        //   name: 'bootstrap',
+        //   // priority: 2
+        // },
+        // lodash: {
+        //   test: /[\\/]node_modules[\\/]lodash-es[\\/]/,
+        //   name: 'lodash-es',
+        //   // priority: 2
+        // },
         node_modules: {
           test: /[\\/]node_modules[\\/]/,
           name(module) {
@@ -87,7 +87,7 @@ module.exports = {
       }),
       new ImageMinimizerPlugin({
         minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify, // imageminMinify
+          implementation: ImageMinimizerPlugin.imageminMinify, 
           options: {
             plugins: [
               ["imagemin-mozjpeg", { quality: 40 }],
@@ -122,6 +122,14 @@ module.exports = {
             ],
           },
         },
+        // generator: [{ // suggest to be used combined with copy webpack plugin 
+        //   type: 'asset',
+        //   preset: 'webp-custom-name',
+        //   implementation: ImageMinimizerPlugin.imageminGenerate,
+        //   options: { 
+        //     plugins: ['imagemin-webp'] //responsible for creating webp images from existing images
+        //   }
+        // }]
       })
     ]
   },
@@ -129,12 +137,12 @@ module.exports = {
     rules: [
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/i,  // i to be case insensitive
-        type: 'asset',// General asset type let webpack decide either asset/resource or asset/inline  default rule ifFile > 8kb asset/resource ifFile < 8kb asset/inline
-        parser: {
-          dataUrlCondition: { // Set size configuration on what will webpack select either asset/resource or asset/inline
-            maxSize: 10 * 1024 // 10 kilobytes if lesser inline else resource
-          }
-        },
+        type: 'asset/resource',// General asset type let webpack decide either asset/resource or asset/inline  default rule ifFile > 8kb asset/resource ifFile < 8kb asset/inline
+        // parser: { // uncomment this bundle to customise type 'asset'
+        //   dataUrlCondition: { // Set size configuration on what will webpack select either asset/resource or asset/inline
+        //     maxSize: 10 * 1024 // 10 kilobytes if lesser inline else resource
+        //   }
+        // },
 
         ////////////// Not Working when using Ubuntu Terminal
         // use: [
