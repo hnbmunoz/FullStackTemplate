@@ -44,6 +44,7 @@
     "imagemin-pngquant": "^9.0.2",
     "imagemin-svgo": "^10.0.1",
     "mini-css-extract-plugin": "^2.7.2",
+    "react-icons": "^4.8.0",
     "sass": "^1.57.0",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
